@@ -24,7 +24,7 @@ module.exports = {
         create_folders: {
             table: '<%= basetable %>',
             template: 'src/_init/template_create_folders.xml',
-            dest: '<%= build_dir %>/_init/create_folders.xml',
+            dest: '<%= build_dir %>/_init/create_folders.xml', // tokenize template to dest using 'template' task
             // users: 'oi_ecom_internal_users',
             users: 'inherit',
             options: {
@@ -35,14 +35,14 @@ module.exports = {
 
     quick_queries: {
         hello_world: {
-            container: '<%= app_dir %>/hello.world.html',
+            container: '<%= app_dir %>/hello.world.html',   // html iframe container
             src: '<%= app_dir %>/hello.world.xml',
-            dest: '<%= build_dir %>/app/hello.world.xml',  // tokenize using 'replace' task
+            dest: '<%= build_dir %>/app/hello.world.xml',  // tokenize src to dest using 'template' task
             title: 'Hello World Example App',
             name: '<%= root_path %>.main',
             url: 'https://www2.1010data.com/cgi-bin/beta-latest/quickapp?path=<%= quick_queries.hello_world.name %>',
             table: '<%= quick_queries.hello_world.name %>\(<%= quick_queries.hello_world.title %>\;\;\)=<%= basetable %>',
-            ordinal: 99
+            ordinal: 99 // deploy last because there are dependencies which must be deployed beforehand
         },
 
         lib1: {
