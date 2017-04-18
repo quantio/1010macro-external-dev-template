@@ -76,7 +76,7 @@ To manually deploy the query:
 ## Grunt tasks:
 
 #### Deploy task
-Deploys the application into 1010 creating any folders needed.  The root of the application is declared as 'root_path' in 'build.config.js'.
+Deploys the application into 1010data creating any folders needed.  The root of the application is declared as 'root_path' in 'build.config.js'.
 ```
     root_path: 'pub.consumer_data.oi.internal.workspace.<%= login.id %>.app',
 ``` 
@@ -99,6 +99,17 @@ To run:
 ```
     grunt serve
 ```    
+
+#### Test_queries task
+Runs all unit tests (*.spec.js) for the app deployed into 1010data platform.   
+
+To run:
+```
+    grunt test_queries
+```    
+
+
+
 
 #### Weather task
 This task is an example of running a query and logging the results to the console. It also shows how to manually create your own 'watch' and 'tendo' tasks. See the 'weather' node in 'tasks/configure.tendo.js'. 
