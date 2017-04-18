@@ -24,6 +24,11 @@ module.exports = function (grunt) {
           flatten: true,
           src: ['<%= quick_queries.hello_world.container %>'],
           dest: '<%= build_dir %>'
+        }, {
+          expand: true,
+          cwd: 'src',
+          src: ['**/*.spec.js'],
+          dest: '<%= build_dir %>'
         }]
       },
 

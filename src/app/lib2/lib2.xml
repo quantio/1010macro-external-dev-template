@@ -1,5 +1,24 @@
 <library>
-    <block name="helloLib2">
-        <widget class_="text" text_="Hello From Lib2 - [[DATE_TEST]]"/>
+    <block name="add" input1="" input2="">
+        <willbe name="answer" value="{@input1 + @input2}"/>
+        <colord cols="answer"/>
+    </block>
+
+    <block name="helloLib2" input1="" input2="">
+        <widget class_="nest">
+            <dynamic>
+                <do value_="@add" row_="1">
+                    <insert block="add" input1="{@input1}" input2="{@input2}"/>
+                </do>
+                <layout arrange_="v" border_="1">
+                    <widget class_="text" text_="Hello From Lib2 on [[DATE_TEST]]"/>
+                    <widget class_="text" text_="I think {@input1} + {@input2} = {@add.answer}"/>
+                </layout>
+            </dynamic>
+        </widget>
     </block>
 </library>
+
+<dynamic input1="2" input2="3">
+    <insert block="helloLib2" input1="1" input2="2"/>
+</dynamic>

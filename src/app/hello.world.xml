@@ -1,10 +1,12 @@
 <import path="<%= root_path %>.lib1.lib1" once="1"/>
 <import path="<%= root_path %>.lib2.lib2" once="1"/>
 <block name="helloWorld">
-    <widget class_="text" text_="Hello from san diego"/>
+    <widget class_="text" text_="Hello World!" border_="1" margin_="0 0 5px 0"/>
 </block>
-<dynamic>
-    <insert block="helloWorld"/>
-    <insert block="helloLib1"/>
-    <insert block="helloLib2"/>
+<dynamic input1="1" input2="2">
+    <layout arrange_="v">
+        <insert block="helloWorld"/>
+        <insert block="helloLib1"/>
+        <insert block="helloLib2"/>
+    </layout>
 </dynamic>
