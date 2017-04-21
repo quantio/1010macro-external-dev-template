@@ -100,16 +100,21 @@ To run:
     grunt serve
 ```    
 
-#### Test_queries task
-Runs all unit tests (*.spec.js) for the app deployed into 1010data platform.   
+#### Unit_tests task
+Runs all unit tests (*.spec.js, ignores *.e2e.spec.js) for the app deployed into 1010data platform. These tests use tendo.
 
 To run:
 ```
-    grunt test_queries
+    grunt unit_tests
 ```    
 
+#### E2e_tests task
+Runs all "end to end" tests (*.e2e.spec.js) for the app deployed into 1010data platform.  These tests use selenium.    
 
-
+To run:
+```
+    grunt e2e_tests
+```    
 
 #### Weather task
 This task is an example of running a query and logging the results to the console. It also shows how to manually create your own 'watch' and 'tendo' tasks. See the 'weather' node in 'tasks/configure.tendo.js'. 

@@ -29,6 +29,10 @@ module.exports = function (grunt) {
           cwd: 'src',
           src: ['**/*.spec.js'],
           dest: '<%= build_dir %>'
+        }, {
+          expand: true,
+          src: ['test/*.wdio.conf.js'],
+          dest: '<%= build_dir %>'
         }]
       },
 
