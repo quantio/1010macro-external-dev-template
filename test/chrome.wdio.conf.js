@@ -124,14 +124,14 @@ exports.config = {
   // The only one supported by default is 'dot'
   // see also: http://webdriver.io/guide/testrunner/reporters.html
   // reporters: ['dot','teamcity'],
-  reporters: ['spec', 'teamcity'],
+  reporters: ['spec'],
 
   //
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
     //
     // Jasmine default timeout
-    defaultTimeoutInterval: 20000,
+    defaultTimeoutInterval: 50000,
     //
     // The Jasmine framework allows interception of each assertion in order to log the state of the application
     // or website depending on the result. For example, it is pretty handy to take a screenshot every time

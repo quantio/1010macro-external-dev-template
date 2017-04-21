@@ -25,7 +25,7 @@ function configureJasmineAndLogin() {
           compare: function (actual, expected) {
             return {
               pass: actual.indexOf(expected) === 0,
-              message: "Expected " + actual + " to start with" + expected + ' = ' + actual.indexOf(expected) === 0
+              message: "Expected " + actual + " to start with" + expected
             }
           }
         }
