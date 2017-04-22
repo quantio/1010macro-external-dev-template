@@ -4,11 +4,12 @@ describe('Example Integration Tests', function () {
   configureJasmineAndLogin();
 
   it('should find 3 "Hello" messages', function () {
-    var selector = 'span*=Hello';
-    browser.waitForExist(selector);
-    var msgs = browser.getText(selector);
     var expected = ['Hello World!', 'Hello From Lib1', 'Hello From Lib2'];
 
+    var selector = 'span*=Hello';
+    browser.waitForExist(selector);
+
+    var msgs = browser.getText(selector);
     expect(msgs.length).toEqual(3);
     _.each(msgs, function (msg, index) {
       expect(msg).toStartWith(expected[index]);
@@ -17,7 +18,7 @@ describe('Example Integration Tests', function () {
 });
 
 function configureJasmineAndLogin() {
-  // this will add a custom matcher and log into the 1010 platform
+  // this will add the 'toStartWith' custom matcher and log into the 1010 platform
   beforeAll(function () {
     jasmine.addMatchers({
       toStartWith: function (utils, customEqualityTesters) {
