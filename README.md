@@ -31,9 +31,14 @@ Install the grunt command line interface (globally):
 ```    
 
 ## Notes on TenDo
-* TenDo tasks are executed via the [grunt-tendo](https://www.npmjs.com/package/grunt-tendo) npm package (which internally uses the [tendo](https://www.npmjs.com/package/tendo) npm package).   The grunt-tendo task configurations are located in 'tasks\configure.tendo.js' and additional configuration values can be found 'build.config.js'. 
-* To simplify running grunt tasks add your 1010data user name and password to the system environment.  Please see [Setting Environment Variables](https://www2.1010data.com/documentationcenter/beta/TendoUsersGuide/index_frames.html).
+* TenDo tasks are executed via the [grunt-tendo](https://www.npmjs.com/package/grunt-tendo) npm package (which internally uses the [tendo](https://www.npmjs.com/package/tendo) npm package).   The grunt-tendo task configurations are located in 'tasks\configure.tendo.js' and additional configuration values can be found 'build.config.js'.
 * An additional option is to add a 'TENDO_HOME' environment variable to the path of the TenDo executable.
+* To simplify running grunt tasks add your 1010data user name and password to the system environment. Supported Env Vars:
+   * TENTENUID
+   * TENTENPW
+   * TENTENPROXY
+
+   For additional information please see [Setting Environment Variables](https://www2.1010data.com/documentationcenter/beta/TendoUsersGuide/index_frames.html)
 
 ## Quick usage examples:
 Before diving into any of the configs lets see some quick examples!:
@@ -78,14 +83,14 @@ To manually deploy the query:
 
 #### Deploy task
 Deploys the application into 1010data creating any folders needed.  The root of the application is declared as 'root_path' in 'build.config.js'.
-```
+```js
     root_path: 'pub.consumer_data.oi.internal.workspace.<%= login.id %>.app',
 ``` 
  
 If you do not have write permissions to this folder change it to somewhere you do.
    
- For example:
-```
+For example:
+```js
     root_path: 'pub.mydepartment.somewhere.<%= login.id %>.app'
 ``` 
 
