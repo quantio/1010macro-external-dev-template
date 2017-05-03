@@ -3,7 +3,8 @@ Boilerplate template to provide grunt tasks to:
 * run a local server to test quickapps in an iframe. When files change upload to 1010 and then refresh browser via [LiveReload](http://livereload.com/).
 * deploy application into 1010 (includes creating folders if they do not exist)
 * run queries and see the results in console (via tendo)
-
+* run unit tests
+* run End-To-End tests
 
 ## Requirements:
 * [Nodejs](http://nodejs.org/)
@@ -37,7 +38,7 @@ Install the grunt command line interface (globally):
 ## Quick usage examples:
 Before diving into any of the configs lets see some quick examples!:
  
-1. First deploy the app:
+1. First deploy the app (Note: This task may fail if you do not have the correct folder permssions, please see '[deploy-task](#deploy-task)' docs below):
 ```js
     grunt deploy
 ```    
@@ -80,8 +81,15 @@ Deploys the application into 1010data creating any folders needed.  The root of 
 ```
     root_path: 'pub.consumer_data.oi.internal.workspace.<%= login.id %>.app',
 ``` 
- login.id will be replaced with the user id used to run the grunt command.
  
+If you do not have write permissions to this folder change it to somewhere you do.
+   
+ For example:
+```
+    root_path: 'pub.mydepartment.somewhere.<%= login.id %>.app'
+``` 
+
+ login.id will be replaced with the user id used to run the grunt command.
  
  To run:
  ```
@@ -101,7 +109,7 @@ To run:
 ```    
 
 #### Unit_tests task
-Runs all unit tests (*.spec.js, ignores *.e2e.spec.js) for the app deployed into 1010data platform. These tests use tendo.
+Runs all Unit tests (*.spec.js, ignores *.e2e.spec.js) for the app deployed into 1010data platform. These tests use tendo.
 
 To run:
 ```
@@ -109,7 +117,7 @@ To run:
 ```    
 
 #### E2e_tests task
-Runs all "end to end" tests (*.e2e.spec.js) for the app deployed into 1010data platform.  These tests use selenium.    
+Runs all End-to-End tests (*.e2e.spec.js) for the app deployed into 1010data platform.  These tests use selenium.    
 
 To run:
 ```
