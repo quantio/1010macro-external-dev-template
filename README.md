@@ -32,13 +32,13 @@ Install the grunt command line interface (globally):
 
 ## Notes on TenDo
 * TenDo tasks are executed via the [grunt-tendo](https://www.npmjs.com/package/grunt-tendo) npm package (which internally uses the [tendo](https://www.npmjs.com/package/tendo) npm package).   The grunt-tendo task configurations are located in 'tasks\configure.tendo.js' and additional configuration values can be found 'build.config.js'.
-* An additional option is to add a 'TENDO_HOME' environment variable to the path of the TenDo executable.
 * To simplify running grunt tasks add your 1010data user name and password to the system environment. Supported Env Vars:
    * TENTENUID
    * TENTENPW
    * TENTENPROXY
 
    For additional information please see [Setting Environment Variables](https://www2.1010data.com/documentationcenter/beta/TendoUsersGuide/index_frames.html)
+* An additional option is to add a 'TENDO_HOME' environment variable to the path of the TenDo executable.
 
 ## Quick usage examples:
 Before diving into any of the configs lets see some quick examples!:
