@@ -5,12 +5,12 @@ Boilerplate template to provide grunt tasks to:
 * run queries and see the results in console (via tendo)
 
 
-##Requirements:
+## Requirements:
 * [Nodejs](http://nodejs.org/)
 * [Grunt](http://gruntjs.com/)
 * [Tendo](http://www.1010data.com/)
 
-##Optional
+## Optional
 * [LiveReload](https://chrome.google.com/webstore/search/livereload) chrome extension to automatically refresh browser when files change. 
 
 ## Getting Started
@@ -29,7 +29,7 @@ Install the grunt command line interface (globally):
     npm install -g grunt-cli
 ```    
 
-##Notes on TenDo
+## Notes on TenDo
 * TenDo tasks are executed via the [grunt-tendo](https://www.npmjs.com/package/grunt-tendo) npm package (which internally uses the [tendo](https://www.npmjs.com/package/tendo) npm package).   The grunt-tendo task configurations are located in 'tasks\configure.tendo.js' and additional configuration values can be found 'build.config.js'. 
 * To simplify running grunt tasks add your 1010data user name and password to the system environment.  Please see [Setting Environment Variables](https://www2.1010data.com/documentationcenter/beta/TendoUsersGuide/index_frames.html).
 * An additional option is to add a 'TENDO_HOME' environment variable to the path of the TenDo executable.
@@ -93,7 +93,7 @@ Can be used to automate file changes (deploying, tokenizing, etc).
 
 * Starts a 'connect' http webserver locally ([http://localhost:8000/](http://localhost:8000/)) (see 'tasks/configure.connect.js') ,
 * Watches for file changes (see 'tasks/configure.watch.js) and runs configured tasks.
-* Notifies 'LiveReload' chrome extension to refresh page (see 'tasks/configure.connect.js').  Also, see [livereload.com](https://chrome.google.com/webstore/search/livereload) for more info.
+* Notifies '[LiveReload](https://chrome.google.com/webstore/search/livereload)' chrome extension to refresh page (see 'tasks/configure.connect.js').  Also, see [livereload.com](https://chrome.google.com/webstore/search/livereload) for more info.
 
 To run:
 ```
