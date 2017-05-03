@@ -4,7 +4,7 @@ module.exports = function (grunt) {
      * Starts a local http server to serve up the build folder as the root folder.  Any tokenized html files can be found here.
      * Also connects to livereload pluging to automatically refresh browser windows when tasks have finished.
      */
-    var buildConfig = require('../build.config.js');
+    var buildConfig = require('../env.config.js')(grunt);
     var serveStatic = require('serve-static');
     var serveIndex = require('serve-index');
 

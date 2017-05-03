@@ -1,5 +1,5 @@
 module.exports = function (grunt) {
-  var buildConfig = require('../build.config.js');
+  var buildConfig = require('../env.config.js')(grunt);
   var _ = require('lodash');
 
   grunt.registerMultiTask('create_folders', 'Create 1010 folders from quick_queries', function () {

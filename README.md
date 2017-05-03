@@ -38,7 +38,9 @@ Install the grunt command line interface (globally):
    * TENTENPROXY
 
    For additional information please see [Setting Environment Variables](https://www2.1010data.com/documentationcenter/beta/TendoUsersGuide/index_frames.html)
-* An additional option is to add a 'TENDO_HOME' environment variable to the path of the TenDo executable.
+* Additional options: 
+    * TENDO_HOME = environment variable to the path of the TenDo executable.
+    * TENTENAPPPATH = The full path to where the application is or will be deployed to. Also see 'root_path' in the 'build.config.js'.
 
 ## Quick usage examples:
 Before diving into any of the configs lets see some quick examples!:
@@ -55,7 +57,7 @@ Before diving into any of the configs lets see some quick examples!:
     
 3. Open a Chrome browser and navigate to (http://localhost:8000/hello.world.html). The "Hello World" quickapp will be loaded into the html iframe.
 
-4. Turn on the livereload extension (located in the upper right hand corner of the chrome browser).
+4. Turn on the [LiveReload](https://chrome.google.com/webstore/search/livereload) extension (located in the upper right hand corner of the chrome browser).
 
 5. Now open 'src/app/hello.world.xml' and change 'Hello World' to 'World Hello' and save.  The serve command will detect the file has change, rebuild it, push it up to 1010 and then refresh the browser ([LiveReload.com](https://chrome.google.com/webstore/search/livereload) extension required).   
    
@@ -80,6 +82,15 @@ To manually deploy the query:
 
 
 ## Grunt tasks:
+All tasks accept any combination of the following command line overrides:
+* u = user id
+* p = user id password
+* g = 1010 gateway url
+* a = The full path to where the application is or will be deployed to (example: 'abc.def.my_id.app')
+```
+    grunt deploy -u my_user_id -a some.amazing.thing.app
+```
+
 
 #### Deploy task
 Deploys the application into 1010data creating any folders needed.  The root of the application is declared as 'root_path' in 'build.config.js'.
@@ -87,7 +98,7 @@ Deploys the application into 1010data creating any folders needed.  The root of 
     root_path: 'pub.consumer_data.oi.internal.workspace.<%= login.id %>.app',
 ``` 
  
-If you do not have write permissions to this folder change it to somewhere you do.
+If you do not have write permissions to this folder change it to somewhere you do.  Or you may specify the path as command line arg '-a' or specify via an environment variable 'TENTENAPPPATH'.
    
 For example:
 ```js

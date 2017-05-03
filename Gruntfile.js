@@ -39,7 +39,7 @@ module.exports = function (grunt) {
   if (!login_password)
     grunt.fatal('Password not specified via "-p" cmd line arg or specified as environment variable "TENTENPW"');
 
-  var buildConfig = require('./build.config.js');
+  var buildConfig = require('./env.config.js')(grunt);
   grunt.initConfig(
     grunt.util._.extend({
         login_id: login_id,
