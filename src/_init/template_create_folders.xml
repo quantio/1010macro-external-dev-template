@@ -4,6 +4,7 @@
     <do value_="@exists_<%= folder.id %>">
         <meta>empty</meta>
         <directory folder="<%= folder.parent %>"/>
+        <merge table2="default.lonely" match="pad"/>
         <willbe name="exists" value="path='<%= folder.path %>'"/>
         <willbe name="rowcount" value="g_cnt(;exists)"/>
         <sel value="i_()=1"/>
