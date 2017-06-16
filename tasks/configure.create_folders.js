@@ -30,7 +30,10 @@ module.exports = function (grunt) {
         var path = file.substring(0, file.lastIndexOf('.'));
         return _.map(buildPaths(path, []), function (p) {
           p.id = id++;
-          p.title = o.folderLabel || o.title || p.path.substring(p.path.lastIndexOf('.') + 1);
+          if (p.path === path)
+            p.title = o.folderLabel || o.title || p.path.substring(p.path.lastIndexOf('.') + 1);
+          else
+            p.title = p.path.substring(p.path.lastIndexOf('.') + 1);
           return p;
         });
       })
