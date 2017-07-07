@@ -3,7 +3,7 @@
  */
 module.exports = {
   /**
-   *   example of structures to override variables for environments. The default enviroment config is 'developer'
+   *   example of structures to override variables for environments. The default environment config is 'developer'
    *
    *  Example to deploy using the "ci" settings
    *    grunt deploy -env=ci
@@ -12,9 +12,12 @@ module.exports = {
     developer: {},
     ci: {
       // root_path: 'pub.consumer_data.oi.ecom.ci',
+      // platform_version: 'beta-latest'
     },
     test: {
       // root_path: 'pub.consumer_data.oi.ecom.test',
+      // login_gateway: 'https://njtest.corp.1010data/beta-latest/gw',
+      // login_gateway_host: 'https://njtest.corp.1010data.com'
     },
 
     beta: {
@@ -23,6 +26,7 @@ module.exports = {
 
     prod: {
       // root_path: 'pub.consumer_data.oi.ecom.client_portal',
+      // platform_version: 'prime-latest'
     }
   },
 
@@ -64,7 +68,7 @@ module.exports = {
       dest: '<%= build_dir %>/app/hello.world.xml',  // tokenize src to dest using 'template' task
       title: 'Hello World Example App',
       name: '<%= root_path %>.main',
-      url: 'https://www2.1010data.com/cgi-bin/beta-latest/quickapp?path=<%= quick_queries.hello_world.name %>',
+      url: '<%= login_gateway_host %>/cgi-bin/<%= platform_version %>/quickapp?path=<%= quick_queries.hello_world.name %>',
       table: '<%= quick_queries.hello_world.name %>\(<%= quick_queries.hello_world.title %>\;\;\)=<%= basetable %>',
       ordinal: 99 // deploy last because there are dependencies which must be deployed beforehand
     },
