@@ -14,6 +14,26 @@ module.exports = function (grunt) {
     buildConfig,
     overrides, {
       env: env
+    }, {
+      mapSrcOrTokenizedFile: function (src, dest, srcFrom, destFrom, alwaysMerge) {
+        srcFrom = srcFrom || 'src';
+        destFrom = destFrom || 'dest';
+        return function (acc, o, name) {
+          var obj = _.cloneDeep(o);
+          // use the tokenized file
+          if (obj[destFrom]) {
+            obj[src] = obj[srcFrom];
+            obj[dest] = obj[destFrom];
+
+            acc[name] = obj;
+          }
+
+          if (alwaysMerge === true)
+            acc[name] = obj;
+
+          return acc;
+        }
+      }
     }
   );
 
