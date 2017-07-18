@@ -147,3 +147,25 @@ To run:
 ```
     grunt weather
 ```
+
+## Tenup Installation Error on Mac
+
+Error:
+
+```
+Fatal error: dyld: Library not loaded: /usr/local/lib/libodbc.2.dylib
+  Referenced from: /applications/tenup
+  Reason: image not found
+
+
+Please ensure the 'tenup' executable is available:
+        Option 1: add tenup executable to the system path.
+        Option 2: pass the full path and tenup executable name to this method by setting 'options.executable'
+        Option 3: specify the home directory of the tenup executable via an environment variable named 'TENUP_HOME'
+```
+
+Solution:
+
+```
+brew install unixodbc
+```
