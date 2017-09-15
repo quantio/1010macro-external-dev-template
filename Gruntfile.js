@@ -30,9 +30,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  var platform_version = 'beta-latest';
-  var gateway = grunt.option('g') || process.env['TENTENGW'] || 'https://www2.1010data.com/' + platform_version + '/gw';
-  var gateway_host = gateway.substring(0, gateway.indexOf('/', 8));
+  // removed in favor of an easier way to override per env inside of build.config.js
+  // var gateway = grunt.option('g') || process.env['TENTENGW'] || 'https://www2.1010data.com/' + platform_version + '/gw';
   var login_id = grunt.option('u') || process.env['TENTENUID'];
   if (!login_id)
     grunt.fatal('Login ID not specified via "-u" cmd line arg or specified as environment variable "TENTENUID"');
@@ -41,16 +40,17 @@ module.exports = function (grunt) {
   if (!login_password)
     grunt.fatal('Password not specified via "-p" cmd line arg or specified as environment variable "TENTENPW"');
 
-  var buildConfig = require('./env.config.js')(grunt);
+  var envConfig = require('./env.config.js')(grunt);
+
+  // build, tokenize and cache platform file auto-managed configurations
+  envConfig.quick_queries = envConfig.util.build("quick_queries", envConfig.quick_queries, envConfig);
+
   grunt.initConfig(
     grunt.util._.extend({
         login_id: login_id,
-        login_password: login_password,
-        login_gateway: gateway,
-        login_gateway_host: gateway_host,
-        platform_version: platform_version
+        login_password: login_password
       },
-      buildConfig, // build info
+      envConfig, // build info
       grunt.file.readJSON('package.json'), // app/package info
       loadTaskConfigs('./tasks/') // task configs
     )
@@ -92,17 +92,8 @@ module.exports = function (grunt) {
     'deploy_all_quick_queries'
   ]);
 
-  var quickQueriesByOrder = _.chain(buildConfig['quick_queries'])
-    .reduce(function asTendoTask(acc, obj, name) {
-      acc.push({name: 'tendo:' + name, ordinal: obj.ordinal || 1});
-      return acc;
-    }, [])
-    .sortBy(['ordinal', 'asc'])
-    .map('name')
-    .value();
-
   // creates a deploy task from all 'quick_queries' defined in build.config.js
-  grunt.registerTask('deploy_all_quick_queries', quickQueriesByOrder);
+  grunt.registerTask('deploy_all_quick_queries', envConfig.util.buildTendoTasks('quick_queries'));
 
   // runs tjhe weather query via tendo
   grunt.registerTask('weather', [

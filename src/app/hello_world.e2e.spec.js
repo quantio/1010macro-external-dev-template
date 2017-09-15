@@ -33,7 +33,7 @@ function configureJasmineAndLogin() {
       }
     });
 
-    login('<%= login.id%>', '<%= login.password %>', '<%= quick_queries.hello_world.url %>', false);
+    login('<%= login.id%>', '<%= login.password %>', '<%= quickapp_path %><%= quick_queries.hello_world._table %>', false);
   });
 }
 

@@ -1,17 +1,7 @@
 module.exports = function (grunt) {
 
-  var buildConfig = require('../env.config.js')(grunt);
+  var envConfig = require('../env.config.js')(grunt);
   var _ = require('lodash');
-
-  var builders = _.reduce(buildConfig['quick_queries'], function asFileWatcher(acc, obj, name) {
-    if (obj.dest) {
-      acc[name] = {
-        src: obj.src,
-        dest: obj.dest
-      };
-    }
-    return acc;
-  }, {});
 
   return _.extend({
       options: {
@@ -43,6 +33,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    // replace tokens in quick queries which have a build dest
-    builders);
+
+    envConfig.util.get('quick_queries'));
 };

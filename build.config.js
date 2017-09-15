@@ -9,15 +9,17 @@ module.exports = {
    *    grunt deploy -env=ci
    */
   env_configs: {
-    developer: {},
+    developer: {
+      // platform_version: 'primerc'
+    },
     ci: {
       // root_path: 'pub.consumer_data.oi.ecom.ci',
       // platform_version: 'beta-latest'
     },
     test: {
       // root_path: 'pub.consumer_data.oi.ecom.test',
-      // login_gateway: 'https://njtest.corp.1010data/beta-latest/gw',
-      // login_gateway_host: 'https://njtest.corp.1010data.com'
+      // platform_version: 'beta-latest'
+      // platform_gateway_host: 'https://njtest.corp.1010data.com'
     },
 
     beta: {
@@ -36,11 +38,15 @@ module.exports = {
   build_dir: 'build',
   app_dir: 'src/app',
 
+  platform_version: 'prime-latest',
+  platform_gateway_host: 'https://www2.1010data.com',
+  quickapp_path: '<%= platform_gateway_host %>/cgi-bin/<%= platform_version %>/quickapp?path=',
+
   /**
    * 1010data credentials
    */
   login: {
-    gateway: '<%= login_gateway %>',
+    gateway: '<%= platform_gateway_host %>/<%= platform_version %>/gw',
     id: '<%= login_id %>',
     password: '<%= login_password %>'
   },
@@ -51,39 +57,38 @@ module.exports = {
   init_queries: {
     create_folders: {
       table: '<%= basetable %>',
-      template: 'src/_init/template_create_folders.xml',
       dest: '<%= build_dir %>/_init/create_folders.xml', // tokenize template to dest using 'template' task
       // users: 'oi_ecom_internal_users',
       users: 'inherit',
       options: {
         args: '-k' // force a new session which ensures folder caches are cleared
-      }
+      },
+      file_configs: ['quick_queries']
     }
   },
 
-  quick_queries: {
-    hello_world: {
-      container: '<%= app_dir %>/hello.world.html',   // html iframe container
-      src: '<%= app_dir %>/hello.world.xml',
-      dest: '<%= build_dir %>/app/hello.world.xml',  // tokenize src to dest using 'template' task
+  // auto-managed quick_queries via file patterns
+  quick_queries: [{
+    cwd: '<%= app_dir %>', // any grunt.file.expand settings (see https://gruntjs.com/api/grunt.file)
+    src: ['**/*.xml', '!**/temp_*.xml'], // any list of grunt file patterns
+    build_dir: '<%= build_dir %>/app',
+
+    // build_dir: '', // optional (default is to use the build.config build_dir)
+    // root_path: '', // optional (default is to use the build.config root_path)
+    // basetable: '', // optional (default is to use the build.config basetable)
+
+    overrides: [{
+      file: 'hello_world.xml',  // required - indicates which file to provide overrides for
       title: 'Hello World Example App',
-      name: '<%= root_path %>.main',
-      url: '<%= login_gateway_host %>/cgi-bin/<%= platform_version %>/quickapp?path=<%= quick_queries.hello_world.name %>',
-      table: '<%= quick_queries.hello_world.name %>\(<%= quick_queries.hello_world.title %>\;\;\)=<%= basetable %>',
+      container: '<%= app_dir %>/hello_world.html',   // html iframe container
       ordinal: 99 // deploy last because there are dependencies which must be deployed beforehand
-    },
-
-    lib1: {
-      table: '<%=root_path%>.lib1.lib1\(Library 1\;\;\)=<%= basetable %>',
-      src: ['<%= app_dir %>/lib1/lib1.xml']
-    },
-
-    lib2: {
-      table: '<%=root_path%>.lib2.lib2\(Library 2\;\;\)=<%= basetable %>',
-      src: ['<%= app_dir %>/lib2/lib2.xml'],
+    }, {
+      file: 'lib2/lib2.xml',  // required - indicates which file to provide overrides for
+      // example overriding tendo arguments for this file
       options: {
         args: '-K -y --query -[[DATE_TEST]]="' + new Date().toString() + '"'
       }
-    }
-  }
+    }]
+  }]
+
 };

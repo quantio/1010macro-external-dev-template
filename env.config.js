@@ -6,6 +6,7 @@
 module.exports = function (grunt) {
   var buildConfig = require('./build.config.js');
   var _ = require('lodash');
+  var tenUtil = require('grunt-tenutil')(grunt);
 
   var env = grunt.option('env') || 'developer';
   var overrides = buildConfig.env_configs[env] || {};
@@ -15,25 +16,7 @@ module.exports = function (grunt) {
     overrides, {
       env: env
     }, {
-      mapSrcOrTokenizedFile: function (src, dest, srcFrom, destFrom, alwaysMerge) {
-        srcFrom = srcFrom || 'src';
-        destFrom = destFrom || 'dest';
-        return function (acc, o, name) {
-          var obj = _.cloneDeep(o);
-          // use the tokenized file
-          if (obj[destFrom]) {
-            obj[src] = obj[srcFrom];
-            obj[dest] = obj[destFrom];
-
-            acc[name] = obj;
-          }
-
-          if (alwaysMerge === true)
-            acc[name] = obj;
-
-          return acc;
-        }
-      }
+      util: tenUtil
     }
   );
 

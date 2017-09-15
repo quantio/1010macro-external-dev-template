@@ -1,19 +1,7 @@
 module.exports = function (grunt) {
 
-  var buildConfig = require('../env.config.js')(grunt);
+  var envConfig = require('../env.config.js')(grunt);
   var _ = require('lodash');
-
-  var quickQueryWatchers = _.reduce(buildConfig['quick_queries'], function asFileWatcher(acc, obj, name) {
-    var tasks = ['tendo:' + name];
-    if (obj.dest)
-      tasks.unshift('template:' + name);
-
-    acc[name] = {
-      files: obj.src,
-      tasks: tasks
-    };
-    return acc;
-  }, {});
 
   return _.extend({
       /**
@@ -64,5 +52,5 @@ module.exports = function (grunt) {
     },
 
     // watch all defined quick_queries
-    quickQueryWatchers);
+    envConfig.util.buildWatcherTasks('quick_queries', ['template', 'tendo']));
 };

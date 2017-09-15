@@ -16,6 +16,7 @@
     "grunt-jasmine-nodejs": "^1.5.4",
     "tendo": "^0.0.5",
     "grunt-tendo": "^0.0.5",
+    "grunt-tenutil": "0.0.2",
     "serve-index": "^1.7.3",
     "serve-static": "^1.10.3",
     "time-grunt": "^0.3.1",

@@ -4,19 +4,20 @@ Boilerplate template to provide grunt tasks to:
 * deploy application into 1010 (includes creating folders if they do not exist)
 * run queries and see the results in console (via tendo)
 * run unit tests
-* run End-To-End tests
+* run End-To-End tests (aka integration test / selenium tests)
 
 ## Requirements:
-* [Nodejs](http://nodejs.org/)
+* [Nodejs (v6.8.0+)](http://nodejs.org/)
 * [Grunt](http://gruntjs.com/)
 * [Tendo](http://www.1010data.com/)
+* [JDK (Java v8+)](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (for e2e testing)
 
 ## Optional
 * [LiveReload](https://chrome.google.com/webstore/search/livereload) chrome extension to automatically refresh browser when files change. 
 
 ## Getting Started
-Install the [Nodejs](http://nodejs.org/), [Grunt](http://gruntjs.com/) and [Tendo](http://www.1010data.com/)  
-
+Install the [Nodejs](http://nodejs.org/), [Grunt](http://gruntjs.com/), [Tendo](http://www.1010data.com/) and [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+  
 
 Install the [Nodejs](http://nodejs.org/) modules used by the project (from the project root folder):
 ```js
@@ -55,27 +56,52 @@ Before diving into any of the configs lets see some quick examples!:
     grunt serve    
 ```
     
-3. Open a Chrome browser and navigate to (http://localhost:8000/hello.world.html). The "Hello World" quickapp will be loaded into the html iframe.
+3. Open a Chrome browser and navigate to the developer dashboard (http://localhost:8000/hello_world.html). 
 
-4. Turn on the [LiveReload](https://chrome.google.com/webstore/search/livereload) extension (located in the upper right hand corner of the chrome browser).
+4. Click on the "Hello World Example App" button. This will load the quick app into a new tab.
 
-5. Now open 'src/app/hello.world.xml' and change 'Hello World' to 'World Hello' and save.  The serve command will detect the file has change, rebuild it, push it up to 1010 and then refresh the browser ([LiveReload.com](https://chrome.google.com/webstore/search/livereload) extension required).   
+5. Turn on the [LiveReload](https://chrome.google.com/webstore/search/livereload) extension (located in the upper right hand corner of the chrome browser).
+
+6. Now open 'src/app/hello_world.xml' and change 'Hello World' to 'World Hello' and save.  The serve command will detect the file has change, rebuild it, push it up to 1010 and then refresh the browser ([LiveReload.com](https://chrome.google.com/webstore/search/livereload) extension required).   
    
 ## Auto-managed quick queries:
-Inside of the 'build.config.js' there is a node named 'quick_queries' this is where the auto-managed quick queries are defined.  Each node will automatically have a 'watch', 'tendo' and optionally a 'replace' task created.  
+Inside of the 'build.config.js' there is a node named 'quick_queries' this is where the auto-managed quick queries are defined.  Each file will automatically have a 'watch', 'tendo' and optionally a 'replace' task created.  
 Example:
 ```js
- quick_queries: {
-    ...
-        lib1: {
-            table: '<%=root_path%>.lib1.lib1\(Library 1\;\;\)=<%= basetable %>',
-            src: ['<%= app_dir %>/lib1/lib1.xml']
-        }
-     ...
-}
+  quick_queries: [{
+      cwd: '<%= app_dir %>', // any grunt.file.expand settings (see https://gruntjs.com/api/grunt.file)
+      src: ['**/*.xml', '!**/temp_*.xml'], // any list of grunt file patterns
+      build_dir: '<%= build_dir %>/app',
+      overrides: []
+  }]
 ```
-This is the minimal configuration needed to manage the lib1.xml quick_query.  
-To manually deploy the query:
+
+To override settings used for the auto-managed quick_queries add a new object to the overrides array for each file you would like to modify settings for.
+Example:
+```js
+  quick_queries: [{
+      cwd: '<%= app_dir %>', // any grunt.file.expand settings (see https://gruntjs.com/api/grunt.file)
+      src: ['**/*.xml', '!**/temp_*.xml'], // any list of grunt file patterns
+      build_dir: '<%= build_dir %>/app',
+      overrides: [{
+          file: 'hello_world.xml',  // required - indicates which file to provide overrides for
+          title: 'Hello World Example App', // this will set the title in the platform. the default is the name of the file (minus the extension)
+      }]
+  }]
+```
+
+It is possible to reach any of the overrides and generated properties as expressions in templates:
+```js
+  // the title of the hello_world quick_query specified in the overrides array
+  <%= quick_queries.hello_world.title %>
+   
+  or
+  
+  // the generated table and with path
+  <%= quick_queries.hello_world._table %> 
+```
+  
+To manually deploy an individual quick query:
 ```
     grunt tendo:lib1
 ```
@@ -85,7 +111,6 @@ To manually deploy the query:
 All tasks accept any combination of the following command line overrides:
 * u = user id
 * p = user id password
-* g = 1010 gateway url
 * a = The full path to where the application is or will be deployed to (example: 'abc.def.my_id.app')
 ```
     grunt deploy -u my_user_id -a some.amazing.thing.app
@@ -95,7 +120,7 @@ All tasks accept any combination of the following command line overrides:
 #### Deploy task
 Deploys the application into 1010data creating any folders needed.  The root of the application is declared as 'root_path' in 'build.config.js'.
 ```js
-    root_path: 'pub.consumer_data.oi.internal.workspace.<%= login.id %>.app',
+    root_path: 'pub.consumer_data.oi.internal.workspace.<%= login.id %>.app'
 ``` 
  
 If you do not have write permissions to this folder change it to somewhere you do.  Or you may specify the path as command line arg '-a' or specify via an environment variable 'TENTENAPPPATH'.
@@ -148,8 +173,12 @@ To run:
     grunt weather
 ```
 
-## Tenup Installation Error on Mac
+## Tenup
 
+Follow this tutorial to add tenup support to the project [Tenup Tutorial](AddingTenupSupport.md) (TODO: Not finished)
+
+
+#### Tenup Installation Error on Mac
 Error:
 
 ```

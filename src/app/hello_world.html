@@ -1,0 +1,63 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .jumbotron {
+            background: #EEEEEE url('http://i.imgur.com/Wi9jDF9.png') no-repeat left bottom;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="jumbotron">
+        <img src="https://1010data.com/img/logo.svg" width="200" height="30"/>
+        <h1><%= quick_queries.hello_world.title %></h1>
+        <p>Developer Dashboard</p>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Environment Configuration: <b><%= env %></b>
+        </div>
+        <div class="panel-body">
+            <div style="color: #959595;padding: 5px;">Links:</div>
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                    <a target="_blank" href="<%= platform_gateway_host %>/<%= platform_version %>"
+                       class="btn btn-default">
+                        Platform Login
+                    </a>
+                </div>
+
+                <div class="btn-group" role="group">
+                    <a target="_blank" href="<%= quickapp_path %><%= quick_queries.hello_world._table %>"
+                       class="btn btn-primary">
+                        <%= quick_queries.hello_world.title %>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 25px;">
+                <strong>NOTE:</strong>
+                The most productive workflow is to first log into the platform using the "Platform Login" link
+                (creating a new session / "End existing session") then log into the platform again by clicking one of
+                the other quickapp links above (choose "Re-entering an existing session"). In this tab turn on <a
+                    href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en"
+            >livereload</a> to automatically reload this quickapp upon local file changes. You should now have 2
+                tabs open (you can open as many quickapp links as needed), the first tab will be the platform which
+                allows for adhoc queries in MLW (or any other platform usage), the second tab will contain the quickapp
+                and reflect local files.
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
