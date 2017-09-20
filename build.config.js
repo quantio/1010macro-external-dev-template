@@ -86,7 +86,7 @@ module.exports = {
       file: 'lib2/lib2.xml',  // required - indicates which file to provide overrides for
       // example overriding tendo arguments for this file
       options: {
-        args: '-K -y --query -[[DATE_TEST]]="' + new Date().toString() + '"'
+        args: '-K -y -Y "*" --query -[[DATE_TEST]]="' + new Date().toString() + '"'
       }
     }]
   }]
