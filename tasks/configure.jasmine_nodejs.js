@@ -3,20 +3,20 @@ module.exports = function (grunt) {
 
   return {
     options: {
+      options: {
+        useHelpers: true
+      },
+      helpers: [
+        "<%= build_dir %>/tendo.helper.js"
+      ],
       reporters: {
         teamcity: teamcity
       }
     },
     unit_tests: {
-      options: {
-        useHelpers: true
-      },
       specs: [
         "build/**/*.spec.js",
         "!build/**/*.e2e.spec.js"
-      ],
-      helpers: [
-        "<%= build_dir %>/tendo.helper.js"
       ]
     }
   }
