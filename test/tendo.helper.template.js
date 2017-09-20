@@ -24,10 +24,8 @@ beforeEach(function () {
     var opts = _.extend(defaultOptions, options);
     var query = (opts.isInlineQuery === true) ? file.replace(/"/g, '\\"').replace(/\|/g, pipe) : '@' + process.env.project_dir + '/' + file;
     tendo.execute(opts, [query], function (status, results) {
-      if (status === false) {
-        expect("query").toBe("successful", results);
-        return;
-      }
+      if (status === false)
+        throw new Error(results);
 
       callback(results[0]);
     });
