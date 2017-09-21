@@ -97,6 +97,6 @@ module.exports = {
   tdd_files: {
     module: 'app/lib2/lib2.xml',
     spec_js: 'app/lib2/lib2.spec.js',
-    spec_xml: '!*'
+    spec_xml: 'app/lib2/lib2.spec.xml'
   }
 };
