@@ -70,7 +70,7 @@ module.exports = {
   // auto-managed quick_queries via file patterns
   quick_queries: [{
     cwd: '<%= app_dir %>', // any grunt.file.expand settings (see https://gruntjs.com/api/grunt.file)
-    src: ['**/*.xml', '!**/temp_*.xml'], // any list of grunt file patterns
+    src: ['**/*.xml', '!**/*_tree.xml', '!**/*.spec.xml'], // any list of grunt file patterns
     build_dir: '<%= build_dir %>/app',
 
     // build_dir: '', // optional (default is to use the build.config build_dir)
