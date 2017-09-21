@@ -22,7 +22,7 @@ module.exports = function (grunt) {
       },
 
       specs: {
-        files: ['src/**/*.spec.js'],
+        files: ['src/**/*.spec.js', '!<%= src %>/<%= tdd_files.spec_js %>'],
         tasks: ['build'],
         options: {
           livereload: false
@@ -52,5 +52,17 @@ module.exports = function (grunt) {
     },
 
     // watch all defined quick_queries
-    envConfig.util.buildWatcherTasks('quick_queries', ['template', 'tendo']));
+    envConfig.util.buildWatcherTasks('quick_queries', ['template', 'tendo']),
+
+    // tdd tasks need to occur after any other watchers to ensure proper order is maintained
+    {
+      tdd: {
+        files: ['<%= src %>/<%= tdd_files.module %>', '<%= src %>/<%= tdd_files.spec_js %>', '<%= src %>/<%= tdd_files.spec_xml %>'],
+        tasks: ['tdd'],
+        options: {
+          spawn: true
+        }
+      }
+    }
+  );
 };

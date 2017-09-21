@@ -77,6 +77,11 @@ module.exports = function (grunt) {
     'webdriver:e2e_tests'
   ]);
 
+  grunt.registerTask('tdd', [
+    'template:tdd',
+    'jasmine_nodejs:tdd'
+  ]);
+
   grunt.registerTask('short_delay', 'avoids "ACCUM" error after running create_folders query', function (target) {
     var done = this.async();
     setTimeout(done, 5000);

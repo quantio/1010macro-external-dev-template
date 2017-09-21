@@ -26,7 +26,16 @@ module.exports = function (grunt) {
         }]
       },
 
-      query_tests: {
+      tdd: {
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['<%= tdd_files.spec_js %>', '<%= tdd_files.spec_xml %>'],
+          dest: '<%= build_dir %>'
+        }]
+      },
+
+      unit_tests: {
         files: [{
           src: ['test/tendo.helper.template.js'],
           dest: '<%= build_dir %>/tendo.helper.js'

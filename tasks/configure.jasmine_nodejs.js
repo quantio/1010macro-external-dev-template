@@ -13,10 +13,17 @@ module.exports = function (grunt) {
         teamcity: teamcity
       }
     },
+
     unit_tests: {
       specs: [
         "build/**/*.spec.js",
         "!build/**/*.e2e.spec.js"
+      ]
+    },
+
+    tdd: {
+      specs: [
+        '<%= build_dir %>/<%= tdd_files.spec_js %>'
       ]
     }
   }

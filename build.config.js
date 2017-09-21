@@ -35,8 +35,9 @@ module.exports = {
   /**
    * The `build_dir` folder is where the projects html files are compiled too
    */
+  src: 'src',
   build_dir: 'build',
-  app_dir: 'src/app',
+  app_dir: '<%= src %>/app',
 
   platform_version: 'prime-latest',
   platform_gateway_host: 'https://www2.1010data.com',
@@ -89,6 +90,13 @@ module.exports = {
         args: '-K -y -Y "*" --query -[[DATE_TEST]]="' + new Date().toString() + '"'
       }
     }]
-  }]
+  }],
 
+  // basic test driven development config which will run the spec_js unit tests when any of the specified files changes.
+  // to disable set all values to '!*' or disable the jasmine_nodejs "tdd" configuration
+  tdd_files: {
+    module: 'app/lib2/lib2.xml',
+    spec_js: 'app/lib2/lib2.spec.js',
+    spec_xml: '!*'
+  }
 };
