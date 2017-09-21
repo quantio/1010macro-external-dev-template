@@ -17,7 +17,7 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: 'src',
-          src: ['**/*.spec.js'],
+          src: ['**/*.spec.js', '**/*.spec.xml'],
           dest: '<%= build_dir %>'
         }, {
           expand: true,
