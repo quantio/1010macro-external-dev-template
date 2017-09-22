@@ -173,7 +173,23 @@ To run:
     grunt weather
 ```
 
-## Tenup
+
+## Testing:
+TODO: move to a separate page and document :-)
+##### Creating unit tests for queries which use a dynamic tag
+* TODO (see lib2.spec.xml for an example)
+
+##### Creating unit tests
+* TODO (see lib2.spec.xml and queries.spec.js for an example)
+
+##### Creating e2e tests
+* TODO (see hello_world.e2e.js for an example)
+
+
+##### Test Driven Development (TDD)
+* TODO (search tdd in build.config.js)
+
+## Tenup:
 
 Follow this tutorial to add tenup support to the project [Tenup Tutorial](AddingTenupSupport.md) (TODO: Not finished)
 
