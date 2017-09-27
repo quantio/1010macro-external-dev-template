@@ -1,6 +1,6 @@
 <import path="<%= root_path %>.lib2.lib2" />
 
-<dynamic first="7" second="6">
+<dynamic first="{{ NUM1 }}" second="6">
 <widget class_="grid">
     <insert block="add" input1="{@first}" input2="{@second}"/>
 </widget>

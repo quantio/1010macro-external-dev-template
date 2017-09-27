@@ -20,7 +20,7 @@ describe("Example Lib2 Tests", function () {
    */
   it("should add together, two numbers defined in a <dynamic/> tag  (7 + 6 = 13)", function (done) {
     var specFile = '<%= build_dir %>/app/lib2/lib2.spec.xml';
-    this.queryQuickAppToJson({}, specFile, function (results) {
+    this.queryQuickAppToJson({tokens: {NUM1: 7}}, specFile, function (results) {
       expect(results[0].answer).toBe('13');
       done();
     });
