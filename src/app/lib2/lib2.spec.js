@@ -5,7 +5,7 @@ describe("Example Lib2 Tests", function () {
    */
   it("should add two numbers together (4 + 8 = 12)", function (done) {
     var query =
-      '<import path="<%= root_path %>.lib2.lib2" />' +
+      '<import path="<%= quick_queries.lib2._table %>" />' +
       '<insert block="add" input1="4" input2="8"/>';
 
     this.queryToJson({isInlineQuery: true}, query, function (results) {
