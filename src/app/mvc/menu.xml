@@ -1,0 +1,28 @@
+<library>
+    <block name="menu_controller">
+        <do on_="init">
+            <set menu_model="{pkg(;)}"/>
+            <setv name="menu_model.report_type" value="{@query_model.report_type}"/>
+            <set menu_model_report_type="{@query_model.report_type}" menu_model_changed="0"/>
+        </do>
+        <ignore>---- Reset the event handler on submit ----
+        </ignore>
+        <do onchange_="@menu_model_changed" when_="{@menu_model_changed=1}">
+            <setv name="query_model.report_type" value="{@menu_model.report_type}"/>
+            <set menu_model_changed="0"/>
+        </do>
+        <do onchange_="@menu_model_report_type">
+            <ignore>---- HACK: pkg event handling----
+            </ignore>
+            <setv name="menu_model.report_type" value="{@menu_model_report_type}"/>
+        </do>
+    </block>
+    <block name="menu_view">
+        <widget class_="dropdown" value_="@menu_model_report_type" textstyle_="font-family:arial;font-size:10px"
+                require_="{@menu}" invmode_="hide" inputwidth_="220">
+            <table cols="report_type,label">test1,Test 1;test2,Test 2;test3,Test 3</table>
+        </widget>
+        <widget class_="button" type_="set" value1_="@menu_model_changed" newvalue1_="1" text_="Apply"
+                textstyle_="font-family:arial;" width_="116"/>
+    </block>
+</library>

@@ -1,0 +1,55 @@
+<import path="<%= quick_queries.menu._table %>" library=""/>
+<import path="<%= quick_queries.test1_report._table %>" library=""/>
+<import path="<%= quick_queries.test2_report._table %>" library=""/>
+<import path="<%= quick_queries.test3_report._table %>" library=""/>
+<library>
+    <block name="mvc_framework">
+        <dynamic>
+            <do on_="init">
+                <set query_model="{pkg(;)}"/>
+                <setv name="query_model.report_type" value="test1"/>
+                <setv name="query_model.msg" value=""/>
+            </do>
+            <insert block="menu_controller"/>
+            <widget class_="progressbar" display_="top"/>
+            <ignore>---- spy keeps track of the browser window dimensions ----
+            </ignore>
+            <widget class_="spy" pkgvalue_="@browser_dims" auto_="1"/>
+            <ignore>
+                --- make sure to add border_="0" padding_="0" margin_="0" to ensure browser.dim width doesn't include
+                any ---
+            </ignore>
+            <layout width_="100%" height_="100%" halign_="center" arrange_="v" border_="0" padding_="0" margin_="0">
+                <layout background_="blue" width_="100%" arrange_="v" border_="0" padding_="0" margin_="0">
+                    <layout>
+                        <insert block="menu_view"/>
+                    </layout>
+                </layout>
+                <layout background_="green" width_="100%" height_="100%" arrange_="v" border_="0" padding_="0"
+                        margin_="0">
+                    <widget class_="nest" require_="{@query_model.report_type<>na & @browser_dims.width>0}"
+                            invmode_="hide"
+                            width_="100%" height_="100%" border_="0" padding_="0" margin_="0"
+                            browser_dims="{@browser_dims}"
+                            bind_="query_model" to_="query_model">
+                        <dynamic>
+                            <switch on="{@query_model.report_type}">
+                                <case when="">
+                                    <widget class_="text" type_="plain" text_="Invalid Report Selected"/>
+                                </case>
+                                <else>
+                                    <insert block="{@query_model.report_type}_report_controller"/>
+                                    <layout background_="red" width_="100%" height_="100%" halign_="center" arrange_="v"
+                                            border_="0" padding_="0" margin_="0">
+                                        <insert block="{@query_model.report_type}_report_view"/>
+                                    </layout>
+                                </else>
+                            </switch>
+                        </dynamic>
+                    </widget>
+                </layout>
+            </layout>
+        </dynamic>
+    </block>
+</library>
+<insert block="mvc_framework"/>

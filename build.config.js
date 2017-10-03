@@ -89,6 +89,10 @@ module.exports = {
       options: {
         args: '-K -y -Y "*" --query -[[DATE_TEST]]="' + new Date().toString() + '"'
       }
+    }, {
+      file: 'mvc/mvc_example.xml',  // required - indicates which file to provide overrides for
+      title: 'MVC Example App',
+      ordinal: 99 // deploy last because there are dependencies which must be deployed beforehand
     }]
   }],
 

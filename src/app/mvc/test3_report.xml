@@ -1,0 +1,30 @@
+<library>
+    <block name="test3_report_controller">
+        <do on_="init">
+            <set test3_model="{pkg(;)}"/>
+        </do>
+        <do value1_="@test3_model" row1_="1">
+            <insert block="test3_report_query"/>
+        </do>
+    </block>
+    <block name="test3_report_view">
+        <ignore>
+            NOTE: This should be width_="100%" and NO height specified. Currently grid will not render if you don't
+            specify height, and I don't want to use that lame splitter wrapper crap which doesn't seem to work properly
+            in a nest
+        </ignore>
+        <widget class_="grid" type_="scroll" width_="100%" height_="500">
+            <insert block="test3_report_query"/>
+        </widget>
+    </block>
+    <block name="test3_report_query">
+        <table cols="test3_col">test3;row2;row3</table>
+        <tabu breaks="{@query_model.report_type}_col">
+            <tcol fun="cnt" source="{@query_model.report_type}_col" name="count"/>
+        </tabu>
+        <willbe name="col3" value="'test3_abcdefghijklmnopqrstuvyxwz'"/>
+        <willbe name="col4" value="'test3_123456780'"/>
+        <willbe name="col5" value="'test3_abcdefghijklmnopqrstuvyxwz'"/>
+        <willbe name="col6" value="'test3_123456780'"/>
+    </block>
+</library>
