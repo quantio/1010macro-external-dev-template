@@ -64,7 +64,11 @@ module.exports = {
       options: {
         args: '-k' // force a new session which ensures folder caches are cleared
       },
-      file_configs: ['quick_queries']
+      file_configs: ['quick_queries'],
+      folders: [{ // specify folder titles and/or creation of empty folders
+        folder: '<%= root_path %>',
+        title: 'Hello World Example App'
+      }]
     }
   },
 
