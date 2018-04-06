@@ -9,7 +9,7 @@ Boilerplate template to provide grunt tasks to:
 ## Requirements:
 * [Nodejs (v6.8.0+)](http://nodejs.org/)
 * [Grunt](http://gruntjs.com/)
-* [Tendo](http://www.1010data.com/)
+* [Tendo](https://www.1010data.com/support/technical-interfaces/tendo/)
 * [JDK (Java v8+)](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (for e2e testing)
 
 ## Optional
