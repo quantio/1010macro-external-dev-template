@@ -38,7 +38,7 @@ Install the grunt command line interface (globally):
    * TENTENPW
    * TENTENPROXY
 
-   For additional information please see [Setting Environment Variables](https://www2.1010data.com/documentationcenter/beta/TendoUsersGuide/index_frames.html)
+   For additional information please see [Setting Environment Variables](https://www2.1010data.com/documentationcenter/beta/TendoUsersGuide/index_frames.html?q=SettingEnvironmentVariables.html)
 * Additional options: 
     * TENDO_HOME = environment variable to the path of the TenDo executable.
     * TENTENAPPPATH = The full path to where the application is or will be deployed to. Also see 'root_path' in the 'build.config.js'.
