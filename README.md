@@ -16,7 +16,7 @@ Boilerplate template to provide grunt tasks to:
 * [LiveReload](https://chrome.google.com/webstore/search/livereload) chrome extension to automatically refresh browser when files change. 
 
 ## Getting Started
-Install the [Nodejs](http://nodejs.org/), [Grunt](http://gruntjs.com/), [Tendo](http://www.1010data.com/) and [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+Install the [Nodejs](http://nodejs.org/), [Grunt](http://gruntjs.com/), [Tendo](https://www.1010data.com/support/technical-interfaces/tendo/) and [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
   
 
 Install the [Nodejs](http://nodejs.org/) modules used by the project (from the project root folder):
